@@ -1,0 +1,197 @@
+[gd_scene load_steps=4 format=3 uid="uid://culut2xbq1e6g"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_rckus"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3rqg"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cr3b5"]
+radius = 500.0
+
+[node name="Main" type="Node"]
+script = ExtResource("1_rckus")
+
+[node name="Gameplay" type="Node" parent="."]
+
+[node name="Background" type="CanvasLayer" parent="Gameplay"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Gameplay/Background"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Star" type="Node2D" parent="Gameplay"]
+position = Vector2(960, 540)
+
+[node name="Body" type="Area2D" parent="Gameplay/Star" groups=["torpedoes"]]
+gravity_point_unit_distance = 500.0
+
+[node name="Polygon2D" type="Polygon2D" parent="Gameplay/Star/Body"]
+color = Color(1, 1, 0.713726, 1)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Star/Body"]
+shape = SubResource("CircleShape2D_i3rqg")
+
+[node name="Gravity" type="Area2D" parent="Gameplay/Star"]
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Star/Gravity"]
+shape = SubResource("CircleShape2D_cr3b5")
+
+[node name="UI" type="CanvasLayer" parent="Gameplay"]
+
+[node name="Menus" type="Node" parent="."]
+
+[node name="Join" type="CanvasLayer" parent="Menus"]
+
+[node name="P1JoiningColorRect" type="ColorRect" parent="Menus/Join"]
+offset_right = 960.0
+offset_bottom = 1080.0
+color = Color(0.276756, 0.000694334, 0.442454, 1)
+
+[node name="P2JoiningColorRect" type="ColorRect" parent="Menus/Join"]
+offset_left = 960.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.276756, 0.000694334, 0.442454, 1)
+
+[node name="P1ReadyColorRect" type="ColorRect" parent="Menus/Join"]
+visible = false
+offset_right = 960.0
+offset_bottom = 1080.0
+color = Color(0.14902, 0.490196, 0.2, 1)
+
+[node name="P2ReadyColorRect" type="ColorRect" parent="Menus/Join"]
+visible = false
+offset_left = 960.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.14902, 0.490196, 0.2, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/Join"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Menus/Join/HBoxContainer"]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Player1JoinLabel" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Player 1
+Press \"X\" on controller to join..."
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menus/Join/HBoxContainer"]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Player2JoinLabel" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Player 2
+Press \"X\" on controller to join..."
+horizontal_alignment = 1
+
+[node name="GameOver" type="CanvasLayer" parent="Menus"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Menus/GameOver"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.639216, 0, 0.152941, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/GameOver/ColorRect"]
+custom_minimum_size = Vector2(640, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -540.0
+offset_right = 320.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Title" type="Label" parent="Menus/GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "GAME OVER!"
+horizontal_alignment = 1
+
+[node name="GameOverSummary" type="Label" parent="Menus/GameOver/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Game Over Summary"
+horizontal_alignment = 1
+
+[node name="CenterContainer1" type="CenterContainer" parent="Menus/GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PlayAgainButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Play Again"
+
+[node name="CreditsButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Credits"
+
+[node name="Pause" type="CanvasLayer" parent="Menus"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Pause"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.334108, 0.36481, 0.768627)
+
+[node name="Label" type="Label" parent="Menus/Pause/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -33.5
+offset_right = 92.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "PAUSED"
+
+[node name="Audio" type="Node" parent="."]
+
+[connection signal="body_entered" from="Gameplay/Star/Body" to="." method="_on_star_body_entered"]
+[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
