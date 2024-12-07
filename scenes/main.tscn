@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://culut2xbq1e6g"]
+[gd_scene load_steps=9 format=3 uid="uid://culut2xbq1e6g"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_rckus"]
 [ext_resource type="Texture2D" uid="uid://br7v0o52jmbb1" path="res://assets/space.png" id="2_7y807"]
@@ -11,6 +11,9 @@ radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cr3b5"]
 radius = 650.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkik3"]
+bg_color = Color(0.564706, 0.0823529, 0.0862745, 1)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rckus")
@@ -191,6 +194,33 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(1, 1, 1, 0)
 
+[node name="Messages" type="CanvasLayer" parent="Gameplay"]
+
+[node name="DisconnectedMessage" type="ColorRect" parent="Gameplay/Messages"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.501961, 0.501961, 0.752941)
+
+[node name="Label" type="Label" parent="Gameplay/Messages/DisconnectedMessage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -426.5
+offset_top = -49.5
+offset_right = 426.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "Controller disconnected!"
+horizontal_alignment = 1
+
 [node name="Menus" type="Node" parent="."]
 
 [node name="Join" type="CanvasLayer" parent="Menus"]
@@ -227,6 +257,41 @@ offset_left = 960.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.14902, 0.490196, 0.2, 1)
+
+[node name="ControllersRequired" type="Label" parent="Menus/Join"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 72
+text = "Controller(s) required!"
+horizontal_alignment = 1
+
+[node name="Countdown" type="PanelContainer" parent="Menus/Join"]
+unique_name_in_owner = true
+visible = false
+offset_top = 160.0
+offset_right = 1920.0
+offset_bottom = 362.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vkik3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Join/Countdown"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menus/Join/Countdown/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Game starting in:"
+horizontal_alignment = 1
+
+[node name="CountdownSeconds" type="Label" parent="Menus/Join/Countdown/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "5"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menus/Join"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -288,10 +353,6 @@ theme_override_font_sizes/font_size = 36
 text = "Ready!"
 horizontal_alignment = 1
 
-[node name="ReadyTimer" type="Timer" parent="Menus/Join"]
-wait_time = 0.5
-one_shot = true
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/Join"]
 anchors_preset = 12
 anchor_top = 1.0
@@ -322,6 +383,10 @@ focus_next = NodePath("../../NotReadyColor")
 focus_previous = NodePath("../CreditsButton")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
+
+[node name="ReadyTimer" type="Timer" parent="Menus/Join"]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="GameOver" type="CanvasLayer" parent="Menus"]
 layer = 2
@@ -510,7 +575,8 @@ theme_override_font_sizes/font_size = 24
 text = "• Design: Michael J. Kozubal Jr. (mjkjr.itch.io)
 • Code: Michael J. Kozubal Jr. (github.com/mjkjr)
 • Engine: Godot (godotengine.org)
-• Spaceship Artwork: Aurelia Kozubal
+• Artwork: Aurelia Kozubal
+• Technical Artwork: Michael J. Kozubal Jr.
 • Play Testing: Zeph Kozubal
 • Play Testing: Aurelia Kozubal
 • Special Thanks: Matthew S (20_games_challenge.gitlab.io)"
@@ -523,9 +589,9 @@ text = "Dismiss"
 [node name="Audio" type="Node" parent="."]
 
 [connection signal="body_entered" from="Gameplay/Star/Body" to="." method="_on_star_body_entered"]
-[connection signal="timeout" from="Menus/Join/ReadyTimer" to="." method="_on_ready_timer_timeout"]
 [connection signal="pressed" from="Menus/Join/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Menus/Join/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="Menus/Join/ReadyTimer" to="." method="_on_ready_timer_timeout"]
 [connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -38,13 +38,11 @@ func _physics_process(_delta: float) -> void:
 		global_position.y = wrapped.y
 
 
-func thrust(direction: Vector2) -> void:
-	var directed_force = direction.rotated(rotation)
+func thrust() -> void:
+	var directed_force = Vector2.UP.rotated(rotation)
 	directed_force *= THRUST
 	apply_central_force(directed_force)
-	
-	if direction == Vector2.UP:
-		$Thrusters/AnimationPlayer.play("thrusters")
+	$Thrusters/AnimationPlayer.play("thrusters")
 
 
 func stop_thrusters() -> void:

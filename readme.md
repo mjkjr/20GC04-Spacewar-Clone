@@ -1,5 +1,5 @@
-# 🚀 TBD
-A Spacewar Clone.
+# 🍕🚀 Pizza Battle in Space!
+A Spacewar! Clone.
 
 My game #4 of the [20 Games Challenge](https://20_games_challenge.gitlab.io/).
 
@@ -12,14 +12,15 @@ My game #4 of the [20 Games Challenge](https://20_games_challenge.gitlab.io/).
 
 ## 🕹️ Play
 
-https://mjkjr.itch.io/TBD-spacewar-clone
+https://mjkjr.itch.io/pizza-battle-in-space-spacewar-clone
 
 ## 👋 Acknowledgments
 
 - Design: [Michael J. Kozubal Jr.](https://mjkjr.itch.io/)
 - Code: [Michael J. Kozubal Jr.](https://github.com/mjkjr)
 - Engine: [Godot](https://godotengine.org/)
-- Spaceship Artwork: Aurelia Kozubal
+- Artwork: Aurelia Kozubal
+- Technical Artwork: Michael J. Kozubal Jr.
 - Play Testing: Zeph Kozubal
 - Play Testing: Aurelia Kozubal
 - Special Thanks: [Matthew S](https://20_games_challenge.gitlab.io/)
