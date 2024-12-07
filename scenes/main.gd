@@ -3,10 +3,6 @@ extends Node
 ## Pizza Battle in Space!
 ## Spacewar! Clone
 
-## TODO: Explosion effects for destroyed ships and torpedoes
-## TODO: Audio
-
-
 enum States { LAUNCH, PLAYING, PAUSED, GAME_OVER }
 enum Modes { SINGLE_PLAYER, TWO_PLAYER }
 
@@ -48,7 +44,8 @@ func _process(_delta: float) -> void:
 				%ReadyColorP1.visible = true
 				%ReadyLabelP1.visible = true
 				%NotReadyLabelP1.visible = false
-				_on_ready_timer_timeout()
+				if %ReadyTimer.is_stopped():
+					_on_ready_timer_timeout()
 			if (
 					Input.is_action_just_pressed("p2_join")
 					and player2 == null
@@ -58,7 +55,8 @@ func _process(_delta: float) -> void:
 				%ReadyColorP2.visible = true
 				%ReadyLabelP2.visible = true
 				%NotReadyLabelP2.visible = false
-				_on_ready_timer_timeout()
+				if %ReadyTimer.is_stopped():
+					_on_ready_timer_timeout()
 		States.PLAYING:
 			if mode == Modes.SINGLE_PLAYER:
 				_ai_player_turn()
@@ -88,9 +86,9 @@ func _process(_delta: float) -> void:
 			elif Input.is_action_just_released("p2_rotate_right"):
 				player2.stop_thrusters()
 			if Input.is_action_just_pressed("p1_shoot"):
-				player1.fire_torpedo()
+				player1.shoot()
 			if Input.is_action_just_pressed("p2_shoot"):
-				player2.fire_torpedo()
+				player2.shoot()
 			if Input.is_action_just_pressed("pause"):
 				state = States.PAUSED
 				$Menus/Pause.visible = true
@@ -230,21 +228,23 @@ func _on_player_destroyed(player_number: int) -> void:
 	_show_game_over_screen("Player %s wins!" % (1 if player_number == 2 else 2))
 
 
-func _on_players_collided() -> void:
-	state = States.GAME_OVER
-	pause_gameplay()
-	_show_game_over_screen("Ships Collided: NO Winners!")
+#func _on_players_collided() -> void:
+	#state = States.GAME_OVER
+	#pause_gameplay()
+	#_show_game_over_screen("Ships Collided: NO Winners!")
 
 
 func _on_star_body_entered(body: Node2D) -> void:
 	var collision_groups = body.get_groups()
 	if collision_groups.has("ships"):
 		if body == player1:
-			#body.queue_free()
-			_on_player_destroyed(1)
+			$SunCollisionSound.finished.connect(func(): _on_player_destroyed(1))
+			$SunCollisionSound.play()
+			player1.explode()
 		else:
-			#body.queue_free()
-			_on_player_destroyed(2)
+			$SunCollisionSound.finished.connect(func(): _on_player_destroyed(2))
+			$SunCollisionSound.play()
+			player2.explode()
 	elif collision_groups.has("torpedoes"):
 		body.queue_free()
 
@@ -346,7 +346,7 @@ func start_game() -> void:
 	player1.rotation_degrees = randf_range(0, 360)
 	player1.damaged.connect(_on_player_damaged.bind(1))
 	player1.destroyed.connect(_on_player_destroyed.bind(1))
-	player1.collided.connect(_on_players_collided)
+	#player1.collided.connect(_on_players_collided)
 	%Player1HP.text = str(player1.get_hp())
 	
 	player2 = PLAYER2.instantiate()
@@ -361,7 +361,13 @@ func start_game() -> void:
 	if Input.get_connected_joypads().size() == 1:
 		mode = Modes.SINGLE_PLAYER
 	else:
-		mode = Modes.TWO_PLAYER
+		if (
+				player1_ready
+				and player2_ready
+		):
+			mode = Modes.TWO_PLAYER
+		else:
+			mode = Modes.SINGLE_PLAYER
 
 	$Menus/Join.visible = false
 	state = States.PLAYING

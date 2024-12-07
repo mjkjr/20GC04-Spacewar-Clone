@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnoywsgo1shq"]
+[gd_scene load_steps=12 format=3 uid="uid://cnoywsgo1shq"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bksk8"]
 [ext_resource type="Texture2D" uid="uid://bt84c1yonq20o" path="res://assets/cheese-ship.png" id="2_05767"]
 [ext_resource type="Texture2D" uid="uid://cx57pqhkomvst" path="res://assets/cheese-thrusters.png" id="2_rcjvk"]
+[ext_resource type="AudioStream" uid="uid://cgiod7x56lnhx" path="res://assets/pew.wav" id="4_b3yaa"]
+[ext_resource type="AudioStream" uid="uid://b467uge4sv532" path="res://assets/thruster.wav" id="5_ve8eh"]
+[ext_resource type="AudioStream" uid="uid://3j1py17uixl" path="res://assets/ping.wav" id="6_dtdq7"]
 
 [sub_resource type="Animation" id="Animation_dl8ti"]
 length = 0.001
@@ -245,6 +248,15 @@ rotation = -0.0523599
 [node name="LauncherCooldownRight" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_b3yaa")
+
+[node name="ThrusterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ve8eh")
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dtdq7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LauncherCooldownLeft" to="." method="_on_launcher_cooldown_left_timeout"]

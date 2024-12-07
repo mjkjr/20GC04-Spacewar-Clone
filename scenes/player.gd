@@ -2,7 +2,7 @@ class_name Player extends RigidBody2D
 
 signal damaged(int)
 signal destroyed
-signal collided
+#signal collided
 
 enum Launchers { LEFT, RIGHT }
 
@@ -44,6 +44,8 @@ func thrust() -> void:
 	directed_force *= THRUST
 	apply_central_force(directed_force)
 	$Thrusters/AnimationPlayer.play("thrusters")
+	if not $ThrusterSound.playing:
+		$ThrusterSound.play()
 
 
 func stop_thrusters() -> void:
@@ -53,14 +55,18 @@ func stop_thrusters() -> void:
 func rotate_left() -> void:
 	apply_torque(-TORQUE)
 	$Thrusters/AnimationPlayer.play("thrust_left")
+	if not $ThrusterSound.playing:
+		$ThrusterSound.play()
 
 
 func rotate_right() -> void:
 	apply_torque(TORQUE)
 	$Thrusters/AnimationPlayer.play("thrust_right")
+	if not $ThrusterSound.playing:
+		$ThrusterSound.play()
 
 
-func fire_torpedo() -> void:
+func shoot() -> void:
 	if (
 			next_launcher == Launchers.LEFT
 			and launchers_ready[Launchers.LEFT]
@@ -74,6 +80,7 @@ func fire_torpedo() -> void:
 		launchers_ready[Launchers.LEFT] = false
 		$LauncherCooldownLeft.start()
 		next_launcher = Launchers.RIGHT
+		$Shoot.play()
 	elif (
 			next_launcher == Launchers.RIGHT
 			and launchers_ready[Launchers.RIGHT]
@@ -87,6 +94,7 @@ func fire_torpedo() -> void:
 		launchers_ready[Launchers.RIGHT] = false
 		$LauncherCooldownRight.start()
 		next_launcher = Launchers.LEFT
+		$Shoot.play()
 
 
 func _on_body_entered(body: Node) -> void:
@@ -95,20 +103,26 @@ func _on_body_entered(body: Node) -> void:
 		hp -= COLLISION_DAMAGE
 		damaged.emit(hp)
 		if hp <= 0:
-			collided.emit()
+			#collided.emit()
+			explode()
 			#queue_free()
 	elif collision_groups.has("torpedoes"):
-		# TODO: explosion effect
 		hp -= body.get_damage()
 		damaged.emit(hp)
+		if not $Hit.playing:
+			$Hit.play()
 		if hp <= 0:
-			var explosion = EXPLOSION.instantiate()
-			$Ship.visible = false
-			$Thrusters.visible = false
-			add_child(explosion)
-			explosion.animation_finished.connect(func(): destroyed.emit())
-			explosion.play()
+			explode()
 			#queue_free()
+
+
+func explode() -> void:
+	var explosion = EXPLOSION.instantiate()
+	$Ship.visible = false
+	$Thrusters.visible = false
+	add_child(explosion)
+	explosion.animation_finished.connect(func(): destroyed.emit())
+	explosion.play()
 
 
 func _on_launcher_cooldown_left_timeout() -> void:

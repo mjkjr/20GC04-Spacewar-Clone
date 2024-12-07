@@ -28,6 +28,7 @@ window/stretch/mode="canvas_items"
 
 ships=""
 torpedoes=""
+star=""
 
 [input]
 

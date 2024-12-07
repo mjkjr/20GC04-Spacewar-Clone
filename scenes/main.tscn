@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://culut2xbq1e6g"]
+[gd_scene load_steps=11 format=3 uid="uid://culut2xbq1e6g"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_rckus"]
 [ext_resource type="Texture2D" uid="uid://br7v0o52jmbb1" path="res://assets/space.png" id="2_7y807"]
 [ext_resource type="Texture2D" uid="uid://cb4f3ls857t54" path="res://assets/corona2.png" id="3_b6xub"]
 [ext_resource type="Texture2D" uid="uid://c4jycj4gt1sko" path="res://assets/star.png" id="3_d52hn"]
 [ext_resource type="Texture2D" uid="uid://ifd7evqx501g" path="res://assets/corona.png" id="3_r781e"]
+[ext_resource type="AudioStream" uid="uid://bor47xj5l2fhm" path="res://assets/Kersplat.wav" id="6_v27vh"]
+[ext_resource type="AudioStream" uid="uid://tykdxape3lbh" path="res://assets/JDSherbert - Minigame Music Pack - Electric Eel Fishing.mp3" id="7_lk0d7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3rqg"]
 radius = 80.0
@@ -83,7 +85,8 @@ polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_r781e")
 
-[node name="Body" type="Area2D" parent="Gameplay/Star"]
+[node name="Body" type="Area2D" parent="Gameplay/Star" groups=["star"]]
+priority = 1
 
 [node name="Polygon2D1" type="Polygon2D" parent="Gameplay/Star/Body"]
 visible = false
@@ -576,6 +579,8 @@ text = "• Design: Michael J. Kozubal Jr. (mjkjr.itch.io)
 • Code: Michael J. Kozubal Jr. (github.com/mjkjr)
 • Engine: Godot (godotengine.org)
 • Artwork: Aurelia Kozubal
+• Sound Effects: Aurelia Kozubal
+• Background Music & SFX: JDSherbert (https://jdsherbert.itch.io/)
 • Technical Artwork: Michael J. Kozubal Jr.
 • Play Testing: Zeph Kozubal
 • Play Testing: Aurelia Kozubal
@@ -587,6 +592,13 @@ layout_mode = 2
 text = "Dismiss"
 
 [node name="Audio" type="Node" parent="."]
+
+[node name="SunCollisionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_v27vh")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lk0d7")
+autoplay = true
 
 [connection signal="body_entered" from="Gameplay/Star/Body" to="." method="_on_star_body_entered"]
 [connection signal="pressed" from="Menus/Join/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
