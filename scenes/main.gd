@@ -117,20 +117,20 @@ func _ai_player_turn() -> void:
 	
 	# rotate toward the other player
 	if (
-			(difference > 5
+			(difference > 10
 			and difference < 150)
 			or
 			(difference < -210
-			and difference > -355)
+			and difference > -350)
 	):
 		Input.call_deferred("action_release", "p2_rotate_left")
 		Input.call_deferred("action_press", "p2_rotate_right")
 	elif (
-	 		(difference < -5
+	 		(difference < -10
 			and difference > -150)
 			or
 			(difference > 210
-			and difference < 355)
+			and difference < 350)
 	):
 		Input.call_deferred("action_release", "p2_rotate_right")
 		Input.call_deferred("action_press", "p2_rotate_left")

@@ -12,6 +12,7 @@ const MAX_HP: int = 100
 const COLLISION_DAMAGE: int = 20
 
 const TORPEDO = preload("res://scenes/torpedo.tscn")
+const EXPLOSION = preload("res://scenes/explosion.tscn")
 
 var hp: int = MAX_HP
 var thrusters_ready: bool = true
@@ -101,21 +102,13 @@ func _on_body_entered(body: Node) -> void:
 		hp -= body.get_damage()
 		damaged.emit(hp)
 		if hp <= 0:
-			destroyed.emit()
+			var explosion = EXPLOSION.instantiate()
+			$Ship.visible = false
+			$Thrusters.visible = false
+			add_child(explosion)
+			explosion.animation_finished.connect(func(): destroyed.emit())
+			explosion.play()
 			#queue_free()
-		#else:
-			#if damage_tween:
-				#if not damage_tween.is_running():
-					#damage_tween.kill()
-					#call_deferred("_do_damage_effect")
-			#else:
-				#_do_damage_effect()
-
-
-#func _do_damage_effect() -> void:
-	#damage_tween = get_tree().create_tween()
-	#damage_tween.tween_property($Polygon2D, "color", Color(1, 1, 1, 1), 0.25)
-	#damage_tween.tween_property($Polygon2D, "color", $Polygon2D.get_color(), 0.25)
 
 
 func _on_launcher_cooldown_left_timeout() -> void:
