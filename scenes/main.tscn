@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://culut2xbq1e6g"]
+[gd_scene load_steps=8 format=3 uid="uid://culut2xbq1e6g"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_rckus"]
+[ext_resource type="Texture2D" uid="uid://br7v0o52jmbb1" path="res://assets/space.png" id="2_7y807"]
+[ext_resource type="Texture2D" uid="uid://cb4f3ls857t54" path="res://assets/corona2.png" id="3_b6xub"]
+[ext_resource type="Texture2D" uid="uid://c4jycj4gt1sko" path="res://assets/star.png" id="3_d52hn"]
+[ext_resource type="Texture2D" uid="uid://ifd7evqx501g" path="res://assets/corona.png" id="3_r781e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3rqg"]
-radius = 100.0
+radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cr3b5"]
-radius = 500.0
+radius = 650.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rckus")
@@ -16,59 +20,209 @@ script = ExtResource("1_rckus")
 [node name="Background" type="CanvasLayer" parent="Gameplay"]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="Gameplay/Background"]
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/Background"]
+position = Vector2(960, 540)
+texture = ExtResource("2_7y807")
 
 [node name="Star" type="Node2D" parent="Gameplay"]
 position = Vector2(960, 540)
 
-[node name="Body" type="Area2D" parent="Gameplay/Star" groups=["torpedoes"]]
-gravity_point_unit_distance = 500.0
+[node name="Corona2" type="Node2D" parent="Gameplay/Star"]
 
-[node name="Polygon2D" type="Polygon2D" parent="Gameplay/Star/Body"]
-color = Color(1, 1, 0.713726, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/Star/Corona2"]
+texture = ExtResource("3_b6xub")
+
+[node name="Polygon2D4" type="Polygon2D" parent="Gameplay/Star/Corona2"]
+visible = false
+rotation = -0.49461
+scale = Vector2(6.68371, 6.68371)
+color = Color(1, 1, 0.713726, 0.0392157)
 polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
 
+[node name="Polygon2D5" type="Polygon2D" parent="Gameplay/Star/Corona2"]
+visible = false
+rotation = -0.832309
+scale = Vector2(6.68371, 6.68371)
+color = Color(1, 1, 0.713726, 0.0392157)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D6" type="Polygon2D" parent="Gameplay/Star/Corona2"]
+visible = false
+rotation = -1.08651
+scale = Vector2(6.68371, 6.68371)
+color = Color(1, 1, 0.713726, 0.0392157)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Corona1" type="Node2D" parent="Gameplay/Star"]
+
+[node name="Polygon2D1" type="Polygon2D" parent="Gameplay/Star/Corona1"]
+visible = false
+rotation = -0.673217
+scale = Vector2(2.49284, 2.49284)
+color = Color(1, 1, 0.713726, 0.117647)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Gameplay/Star/Corona1"]
+visible = false
+rotation = -0.324501
+scale = Vector2(2.49284, 2.49284)
+color = Color(1, 1, 0.713726, 0.0784314)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Gameplay/Star/Corona1"]
+visible = false
+rotation = -0.49461
+scale = Vector2(2.49284, 2.49284)
+color = Color(1, 1, 0.713726, 0.0392157)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/Star/Corona1"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_r781e")
+
+[node name="Body" type="Area2D" parent="Gameplay/Star"]
+
+[node name="Polygon2D1" type="Polygon2D" parent="Gameplay/Star/Body"]
+visible = false
+scale = Vector2(0.823788, 0.823788)
+color = Color(1, 1, 0.713726, 0.901961)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Gameplay/Star/Body"]
+visible = false
+rotation = -0.270018
+scale = Vector2(0.846817, 0.846817)
+color = Color(1, 1, 0.713726, 0.803922)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Gameplay/Star/Body"]
+visible = false
+rotation = -0.261799
+color = Color(1, 1, 0.713726, 0.654902)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Gameplay/Star/Body"]
+visible = false
+rotation = -0.673217
+color = Color(1, 1, 0.713726, 0.529412)
+polygon = PackedVector2Array(-100, 0, -70, 70, 0, 100, 70, 70, 100, 0, 70, -70, 0, -100, -70, -70)
+
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/Star/Body"]
+texture = ExtResource("3_d52hn")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Star/Body"]
+visible = false
 shape = SubResource("CircleShape2D_i3rqg")
 
 [node name="Gravity" type="Area2D" parent="Gameplay/Star"]
+visible = false
 gravity_space_override = 1
 gravity_point = true
+gravity_point_unit_distance = 100.0
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
-gravity = 20.0
+gravity = 225.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Star/Gravity"]
 shape = SubResource("CircleShape2D_cr3b5")
 
 [node name="UI" type="CanvasLayer" parent="Gameplay"]
+layer = 0
+
+[node name="GridContainer" type="GridContainer" parent="Gameplay/UI"]
+custom_minimum_size = Vector2(1920, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="MarginContainer1" type="MarginContainer" parent="Gameplay/UI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 25
+
+[node name="GridContainer" type="GridContainer" parent="Gameplay/UI/GridContainer/MarginContainer1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/UI/GridContainer/MarginContainer1/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Player 1 HP"
+horizontal_alignment = 1
+
+[node name="Player1HP" type="Label" parent="Gameplay/UI/GridContainer/MarginContainer1/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "100"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Gameplay/UI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 25
+
+[node name="GridContainer" type="GridContainer" parent="Gameplay/UI/GridContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/UI/GridContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Player 2 HP"
+horizontal_alignment = 1
+
+[node name="Player2HP" type="Label" parent="Gameplay/UI/GridContainer/MarginContainer2/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "100"
+horizontal_alignment = 1
+
+[node name="ScreenFX" type="CanvasLayer" parent="Gameplay"]
+
+[node name="Flash" type="ColorRect" parent="Gameplay/ScreenFX"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 1, 1, 0)
 
 [node name="Menus" type="Node" parent="."]
 
 [node name="Join" type="CanvasLayer" parent="Menus"]
+layer = 2
+visible = false
 
-[node name="P1JoiningColorRect" type="ColorRect" parent="Menus/Join"]
+[node name="NotReadyColor" type="ColorRect" parent="Menus/Join"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1920, 1080)
 offset_right = 960.0
 offset_bottom = 1080.0
+focus_neighbor_left = NodePath("../VBoxContainer/QuitButton")
+focus_neighbor_top = NodePath("../VBoxContainer/QuitButton")
+focus_neighbor_right = NodePath("../VBoxContainer/CreditsButton")
+focus_neighbor_bottom = NodePath("../VBoxContainer/CreditsButton")
+focus_next = NodePath("../VBoxContainer/CreditsButton")
+focus_previous = NodePath("../VBoxContainer/QuitButton")
+focus_mode = 2
 color = Color(0.276756, 0.000694334, 0.442454, 1)
 
-[node name="P2JoiningColorRect" type="ColorRect" parent="Menus/Join"]
-offset_left = 960.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0.276756, 0.000694334, 0.442454, 1)
-
-[node name="P1ReadyColorRect" type="ColorRect" parent="Menus/Join"]
+[node name="ReadyColorP1" type="ColorRect" parent="Menus/Join"]
+unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(0, 1080)
 offset_right = 960.0
 offset_bottom = 1080.0
 color = Color(0.14902, 0.490196, 0.2, 1)
 
-[node name="P2ReadyColorRect" type="ColorRect" parent="Menus/Join"]
+[node name="ReadyColorP2" type="ColorRect" parent="Menus/Join"]
+unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(0, 1080)
 offset_left = 960.0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -86,12 +240,25 @@ layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Player1JoinLabel" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer1"]
-unique_name_in_owner = true
+[node name="Title" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer1"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Player 1
-Press \"X\" on controller to join..."
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="NotReadyLabelP1" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Press \"x\" button on controller when ready..."
+horizontal_alignment = 1
+
+[node name="ReadyLabelP1" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer1"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Ready!"
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Menus/Join/HBoxContainer"]
@@ -100,15 +267,64 @@ layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Player2JoinLabel" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
+[node name="Title" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Player 2
-Press \"X\" on controller to join..."
+text = "Player 2"
 horizontal_alignment = 1
 
+[node name="NotReadyLabelP2" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Press \"x\" button on controller when ready..."
+horizontal_alignment = 1
+
+[node name="ReadyLabelP2" type="Label" parent="Menus/Join/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Ready!"
+horizontal_alignment = 1
+
+[node name="ReadyTimer" type="Timer" parent="Menus/Join"]
+wait_time = 0.5
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Join"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CreditsButton" type="Button" parent="Menus/Join/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../NotReadyColor")
+focus_neighbor_top = NodePath("../../NotReadyColor")
+focus_neighbor_right = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../../NotReadyColor")
+theme_override_font_sizes/font_size = 36
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="Menus/Join/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../CreditsButton")
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_right = NodePath("../../NotReadyColor")
+focus_neighbor_bottom = NodePath("../../NotReadyColor")
+focus_next = NodePath("../../NotReadyColor")
+focus_previous = NodePath("../CreditsButton")
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
 [node name="GameOver" type="CanvasLayer" parent="Menus"]
+layer = 2
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Menus/GameOver"]
@@ -134,38 +350,55 @@ grow_vertical = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Title" type="Label" parent="Menus/GameOver/ColorRect/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "GAME OVER!"
-horizontal_alignment = 1
-
 [node name="GameOverSummary" type="Label" parent="Menus/GameOver/ColorRect/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "Game Over Summary"
+theme_override_font_sizes/font_size = 72
+text = "Game Over"
 horizontal_alignment = 1
 
-[node name="CenterContainer1" type="CenterContainer" parent="Menus/GameOver/ColorRect/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Menus/GameOver/ColorRect/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="PlayAgainButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer"]
+[node name="PlayAgainButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_next = NodePath("../CreditsButton")
+focus_previous = NodePath("../QuitButton")
 theme_override_font_sizes/font_size = 36
 text = "Play Again"
 
-[node name="CreditsButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../PlayAgainButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../PlayAgainButton")
 theme_override_font_sizes/font_size = 36
 text = "Credits"
 
+[node name="QuitButton" type="Button" parent="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_bottom = NodePath("../PlayAgainButton")
+focus_next = NodePath("../PlayAgainButton")
+focus_previous = NodePath("../CreditsButton")
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
+[node name="GameOverCooldown" type="Timer" parent="Menus/GameOver"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Pause" type="CanvasLayer" parent="Menus"]
+layer = 2
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Menus/Pause"]
@@ -174,24 +407,131 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0, 0.334108, 0.36481, 0.768627)
 
-[node name="Label" type="Label" parent="Menus/Pause/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Pause/ColorRect"]
+custom_minimum_size = Vector2(640, 1080)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -92.5
-offset_top = -33.5
-offset_right = 92.5
-offset_bottom = 33.5
+offset_left = -320.0
+offset_top = -540.0
+offset_right = 320.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Menus/Pause/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="Menus/Pause/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../QuitButton")
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_right = NodePath("../CreditsButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_next = NodePath("../CreditsButton")
+focus_previous = NodePath("../QuitButton")
+text = "Resume"
+
+[node name="CreditsButton" type="Button" parent="Menus/Pause/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../ResumeButton")
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_right = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../ResumeButton")
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="Menus/Pause/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../CreditsButton")
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_right = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
+focus_next = NodePath("../ResumeButton")
+focus_previous = NodePath("../CreditsButton")
+text = "Quit"
+
+[node name="PauseCooldownTimer" type="Timer" parent="Menus/Pause"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Credits" type="CanvasLayer" parent="Menus"]
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Credits"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.333333, 0.364706, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Credits/ColorRect"]
+custom_minimum_size = Vector2(640, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -540.0
+offset_right = 320.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Title" type="Label" parent="Menus/Credits/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "CREDITS"
+
+[node name="Label" type="Label" parent="Menus/Credits/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "• Design: Michael J. Kozubal Jr. (mjkjr.itch.io)
+• Code: Michael J. Kozubal Jr. (github.com/mjkjr)
+• Engine: Godot (godotengine.org)
+• Spaceship Artwork: Aurelia Kozubal
+• Play Testing: Zeph Kozubal
+• Play Testing: Aurelia Kozubal
+• Special Thanks: Matthew S (20_games_challenge.gitlab.io)"
+
+[node name="DismissCreditsButton" type="Button" parent="Menus/Credits/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Dismiss"
 
 [node name="Audio" type="Node" parent="."]
 
 [connection signal="body_entered" from="Gameplay/Star/Body" to="." method="_on_star_body_entered"]
-[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
-[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer1/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="timeout" from="Menus/Join/ReadyTimer" to="." method="_on_ready_timer_timeout"]
+[connection signal="pressed" from="Menus/Join/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Menus/Join/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Menus/GameOver/ColorRect/VBoxContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="Menus/GameOver/GameOverCooldown" to="." method="_on_game_over_cooldown_timeout"]
+[connection signal="pressed" from="Menus/Pause/ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Menus/Pause/ColorRect/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Menus/Pause/ColorRect/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="Menus/Pause/PauseCooldownTimer" to="." method="_on_pause_cooldown_timer_timeout"]
+[connection signal="pressed" from="Menus/Credits/ColorRect/VBoxContainer/DismissCreditsButton" to="." method="_on_dismiss_credits_button_pressed"]

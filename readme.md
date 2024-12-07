@@ -19,6 +19,7 @@ https://mjkjr.itch.io/TBD-spacewar-clone
 - Design: [Michael J. Kozubal Jr.](https://mjkjr.itch.io/)
 - Code: [Michael J. Kozubal Jr.](https://github.com/mjkjr)
 - Engine: [Godot](https://godotengine.org/)
--
+- Spaceship Artwork: Aurelia Kozubal
+- Play Testing: Zeph Kozubal
+- Play Testing: Aurelia Kozubal
 - Special Thanks: [Matthew S](https://20_games_challenge.gitlab.io/)
-

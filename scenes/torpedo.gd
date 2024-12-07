@@ -1,15 +1,12 @@
 extends RigidBody2D
 
-const THRUST = 2_500
+const THRUST = 50_000
+const DAMAGE: int = 10
 
 
 func _physics_process(_delta: float) -> void:
-	var viewport_rect = get_viewport_rect()
-	# TODO: adjust this to account for the size of the player so it doesn't "pop" in and out of
-	# existence on either side of the screen
-	# TODO: raycast a collider to the opposite side and check for collisions before moving
-	
 	# NOTE: Modify global_position so collision keeps working after wrapping around the screen
+	var viewport_rect = get_viewport_rect()
 	var wrapped: Vector2
 	wrapped.x = wrapf(global_position.x, 0, viewport_rect.size.x)
 	wrapped.y = wrapf(global_position.y, 0, viewport_rect.size.y)
@@ -30,4 +27,13 @@ func _on_lifetime_timeout() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.get_groups().has("torpedoes"):
 		# TODO: explosion effect
-		queue_free()
+		pass
+	queue_free()
+
+
+func get_damage() -> int:
+	return DAMAGE
+
+
+func set_color(new_color: Color) -> void:
+	$Polygon2D.color = new_color
